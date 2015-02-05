@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="js/libs/jquery-2.1.3.min.js"></script>
+<script src="js/libs/underscore-min.js"></script>
+<script src="js/libs/backbone-min.js"></script>
+
+<script>
+  var Todo = Backbone.Model.extend({
+    defaults: {
+      title: "",
+      completed: false
+    },
+    initialize: function (e) {
+      console.log('Initialised', e);
+    }
+  });
+
+  var todo1 = new Todo();
+  console.log(todo1.get('title'));
+
+  var todo2 = new Todo({
+    title: "Todo2 Title",
+    completed: true
+  });
+  console.log(todo2.get('title'),todo2.toJSON());
+
+  // Get & Set
+  var todo3 = new Todo({
+    title: "Todo3 Title"
+  });
+  todo3.on('change:completed', function (e) {
+    console.log('Event', e);
+  });
+  console.log('Get',todo3.get('completed'));
+  todo3.set("completed", true);
+
+</script>
+</body>
+</html>
